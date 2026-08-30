@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const nameInput = document.getElementById('signup-name');
         const emailInput = document.getElementById('signup-email');
         const passInput = document.getElementById('signup-pass');
-        const btn = signupForm.querySelector('button');
+        const btn = signupForm.querySelector('button[type="submit"]');
 
         let isValid = true;
 
@@ -162,7 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const emailInput = document.getElementById('login-email');
         const passInput = document.getElementById('login-pass');
-        const btn = loginForm.querySelector('button');
+        const btn = loginForm.querySelector('button[type="submit"]');
 
         let isValid = true;
 

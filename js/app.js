@@ -30,19 +30,43 @@ document.addEventListener('DOMContentLoaded', () => {
     btnShowLogin.addEventListener('click', () => switchTab('login'));
     btnShowSignup.addEventListener('click', () => switchTab('signup'));
 
+    // Forgot Password Flow
+    const btnForgotPassword = document.getElementById('btn-forgot-password');
+    const btnBackToLogin = document.getElementById('btn-back-to-login');
+    const forgotForm = document.getElementById('forgot-form');
+
+    btnForgotPassword?.addEventListener('click', (e) => {
+        e.preventDefault();
+        switchTab('forgot');
+    });
+
+    btnBackToLogin?.addEventListener('click', (e) => {
+        e.preventDefault();
+        switchTab('login');
+    });
+
     function switchTab(tab) {
         if (tab === 'login') {
+            formToggle.style.display = 'flex';
             btnShowLogin.classList.add('active');
             btnShowSignup.classList.remove('active');
             formToggle.classList.remove('right');
             signupForm.classList.remove('active-form');
+            forgotForm.classList.remove('active-form');
             loginForm.classList.add('active-form');
-        } else {
+        } else if (tab === 'signup') {
+            formToggle.style.display = 'flex';
             btnShowSignup.classList.add('active');
             btnShowLogin.classList.remove('active');
             formToggle.classList.add('right');
             loginForm.classList.remove('active-form');
+            forgotForm.classList.remove('active-form');
             signupForm.classList.add('active-form');
+        } else if (tab === 'forgot') {
+            formToggle.style.display = 'none'; // Hide the toggle pill during forgot password
+            loginForm.classList.remove('active-form');
+            signupForm.classList.remove('active-form');
+            forgotForm.classList.add('active-form');
         }
     }
 
@@ -193,6 +217,38 @@ document.addEventListener('DOMContentLoaded', () => {
                 flipToDashboard(sessionUser);
             } else {
                 showToast('Invalid email or password.', 'error');
+            }
+        }, 1500);
+    });
+
+    // Forgot Password Submit
+    forgotForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        clearErrors(forgotForm);
+
+        const emailInput = document.getElementById('forgot-email');
+        const btn = forgotForm.querySelector('button[type="submit"]');
+
+        if (!validateEmail(emailInput.value)) {
+            showError(emailInput, 'forgot-email-err');
+            return;
+        }
+
+        showLoading(btn);
+
+        // Mock API Call delay
+        setTimeout(() => {
+            const users = JSON.parse(localStorage.getItem('authX_users_db') || '[]');
+            const user = users.find(u => u.email === emailInput.value);
+
+            hideLoading(btn);
+
+            if (user) {
+                forgotForm.reset();
+                showToast('Recovery link sent to your email!', 'success');
+                setTimeout(() => switchTab('login'), 2000);
+            } else {
+                showToast('Email not found in our system.', 'error');
             }
         }, 1500);
     });

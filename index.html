@@ -85,7 +85,7 @@
                 <div class="input-group">
                     <div class="label-flex">
                         <label for="login-pass">Password</label>
-                        <a href="#" class="forgot-link">Forgot Password?</a>
+                        <a href="#" class="forgot-link" id="btn-forgot-password">Forgot Password?</a>
                     </div>
                     <div class="input-wrapper">
                         <svg class="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
@@ -167,6 +167,39 @@
                     <span class="btn-text">Create Account</span>
                     <div class="btn-loader loader-hidden"></div>
                 </button>
+            </form>
+
+            <!-- Forgot Password Form -->
+            <form id="forgot-form" class="auth-form hidden-form" novalidate>
+
+                <div style="text-align: center; margin-bottom: 0.5rem;">
+                    <h3 style="margin-bottom: 0.5rem;">Reset Password</h3>
+                    <p style="color:var(--text-muted); font-size:0.9rem;">Enter your email to receive recovery
+                        instructions.</p>
+                </div>
+
+                <div class="input-group">
+                    <label for="forgot-email">Email Address</label>
+                    <div class="input-wrapper">
+                        <svg class="input-icon" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                            </path>
+                            <polyline points="22,6 12,13 2,6"></polyline>
+                        </svg>
+                        <input type="email" id="forgot-email" placeholder="account@example.com" required>
+                    </div>
+                    <span class="error-msg" id="forgot-email-err">Please enter a valid email.</span>
+                </div>
+
+                <button type="submit" class="primary-btn">
+                    <span class="btn-text">Send Recovery Link</span>
+                    <div class="btn-loader loader-hidden"></div>
+                </button>
+
+                <div style="text-align: center; margin-top: 1rem;">
+                    <a href="#" class="forgot-link" id="btn-back-to-login">Back to Login</a>
+                </div>
             </form>
 
         </div>

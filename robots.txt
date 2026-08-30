@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://login-authentication-system-zeta.vercel.app/sitemap.xml
